@@ -40,9 +40,16 @@ router.get("/products", async (req, res) => {
 
 router.get("/products/:productId", async (req, res) => {
     try {
-        const products = await Product.find()
-            .select("_id title author status createdAt")
-            .sort({ createdAt: -1 });
+        const products = await Product.findById(req.params.productId).select(
+            "_id title content author status createdAt"
+        );
+
+        if (!product) {
+            return res
+            .status(404)
+            .json({ message: "상품이 존재하지 않습니다." });
+        }
+
         res.json(products);
     }
     catch (error) {
