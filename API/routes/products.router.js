@@ -119,3 +119,5 @@ router.delete("/products/:productId", async (req, res) => {
         res.status(500).json({ message: "ERROR"});
     }
 });
+
+module.exports = router;
